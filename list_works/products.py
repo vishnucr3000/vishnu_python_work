@@ -15,32 +15,53 @@ mobiles = [
 
 # q1 total number of out_of_stock mobiles
 
-out_of_stock=[stock for stock in mobiles if stock[6]==0]
-print(out_of_stock)
+# out_of_stock=[stock for stock in mobiles if stock[6]==0]
+# print(out_of_stock)
 
 # q2 total stock
 
+# print(sum(t_stock[6] for t_stock in mobiles))
+
+
 # q3 pritn mobiles available in range 20k to 30k
+
+# print([price if price[4]>20000 and price[4]<30000 else 0 for price in mobiles])
 
 # q4 print all 5g phone
 
+# print([stock for stock in mobiles if stock[2]=="5g"])
+
 # q5 print samsung mobiles
 
+# print([sam for sam in mobiles if sam[5]=="samsung"])
 # q6 print costly mobile
+
+costly_prod = max(mobiles, key=lambda m: m[4])
+print(costly_prod)
 
 # q7 prin low cost mobiles
 
+low_cost = min(mobiles, key=lambda m: m[4])
+print(low_cost)
+
 # q8 print all mobiles having stock >10
+
+# print([stock for stock in mobiles if stock[6]>10])
 
 # q9 count of mobiles having dispaly amoled
 
+# lst=[num[0] for num in mobiles if num[3]=="AMOLED"]
+# print(len(lst))
+
 # q10 sort mobiles based on price oredr by desc
+
+# print(sorted([mob[] for mob in mobiles]))
 
 # q11 sort mobiles based on avl stock oredr by desc
 
 # q12 is there any mobile available at rs 10000 ?
 
+mob_ten=[mob[4]==10000 for mob in mobiles]
+print(f"Available" if True in mob_ten else "Not Available")
+
 # q12 list all mobiles having same price
-
-
-

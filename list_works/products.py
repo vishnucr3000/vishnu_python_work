@@ -41,8 +41,8 @@ print(costly_prod)
 
 # q7 prin low cost mobiles
 
-low_cost = min(mobiles, key=lambda m: m[4])
-print(low_cost)
+# low_cost = min(mobiles, key=lambda m: m[4])
+# print(low_cost)
 
 # q8 print all mobiles having stock >10
 
@@ -55,13 +55,19 @@ print(low_cost)
 
 # q10 sort mobiles based on price oredr by desc
 
+sort_mobile=sorted(mobiles,reverse=True, key=lambda m:m[4])
+print(sort_mobile)
+
 # print(sorted([mob[] for mob in mobiles]))
 
 # q11 sort mobiles based on avl stock oredr by desc
 
+sort_by_stock=sorted(mobiles, reverse=True, key=lambda m:m[-1])
+print(sort_by_stock)
+
 # q12 is there any mobile available at rs 10000 ?
 
-mob_ten=[mob[4]==10000 for mob in mobiles]
-print(f"Available" if True in mob_ten else "Not Available")
+# mob_ten=[mob[4]==10000 for mob in mobiles]
+# print(f"Available" if True in mob_ten else "Not Available")
 
 # q12 list all mobiles having same price

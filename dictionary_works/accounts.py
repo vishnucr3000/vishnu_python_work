@@ -1,3 +1,5 @@
+import os
+
 accounts = [
     {
         "acno": 1000, "ac_type": "savings", "balance": 5000, "transactions": [
@@ -39,57 +41,96 @@ accounts = [
 
 # print details of account 1002
 
-acdetails = [ac for ac in accounts if ac["acno"] == 1002]
+acc_details=[ac for ac in accounts if ac["acno"]==1002]
 
-print(acdetails)
+print(acc_details)
+
 
 # print accounts of saving account type
 
-saving_acc = [ac["acno"] for ac in accounts if ac["ac_type"] == "savings"]
+savings_ac=[sa for sa in accounts if sa["ac_type"]=="savings"]
+print(savings_ac)
 
-print(saving_acc)
 
 # sort account based on balance order by desc
 
-accounts.sort(reverse=True, key=lambda ac: ac["balance"])
-print(accounts)
+print(sorted(accounts,key=lambda ac:ac["balance"],reverse=True))
 
-sort_acc = sorted(accounts, reverse=True, key=lambda ac: ac["balance"])
-
-print(sort_acc)
 
 # print all transaction where transaction amount greater than 500
 
-for acc in accounts:
-    trans = [tr for tr in acc["transactions"] if tr["amount"] > 500]
-    print(trans)
+all_transactions=[trans for tlist in accounts for trans in tlist["transactions"] if trans["amount"]<500]
+
+print(all_transactions)
 
 # print all phone pay transactions
 
-all_tran=[ac["transactions"] for ac in accounts]
-p_tran=[trans for tlist in all_tran for trans in tlist if trans["method"]=="phone-pay"]
-print(p_tran)
+phone_pay_tran=[pp for translist in accounts for pp in translist["transactions"] if pp["method"]=="phone-pay" ]
+print(phone_pay_tran)
 
 # print all credit transactions of 1002
 
-amt=[amount for tlist in all_tran for amount in tlist if amount["to"]==1002]
-
-print(amt)
+credit_trans=[credit_tran for credit_trans_list in accounts for credit_tran in credit_trans_list["transactions"] if credit_tran["to"]==1002]
+print(credit_trans)
 
 # aggregate transactions based on payment mode
+
 agg={}
-ag_tran=[tran for at in all_tran for tran in at]
-for mtd in ag_tran:
-    p_method=mtd["method"]
-    p_amt=mtd["amount"]
-    if p_method in agg:
-        agg[p_method]+=p_amt
-    else:
-        agg[p_method]=p_amt
-max_tran=max(agg.items(),key=lambda item:item[1])
-print(max_tran)
 
+for slist in accounts:
+    for trans in slist["transactions"]:
+        t_method=trans["method"]
+        t_amount=trans["amount"]
+        if t_method in agg:
+            agg[t_method]+=t_amount
+        else:
+            agg[t_method]=t_amount
+print(max(agg.items(),key=lambda ag:ag[1]))
 
+# print sum of all transactions
+
+print(sum([t["amount"] for nlist in accounts for t in nlist["transactions"]]))
+
+# print min of all transactions
+
+print(min(m["amount"] for mlist in accounts for m in mlist["transactions"]))
+
+# update a dictionary
+
+agg.update({"g-pay":500})
+
+print(agg)
+
+# sort dictionary keys desc
+
+dictionary={
+    5:10,
+    2:4,
+    7:14,
+    4:8,
+    9:18
+}
+
+print(sorted((i for i in dictionary.keys()),reverse=True))
+
+print(sorted((j for j in dictionary.values()),reverse=True))
+
+print(sorted(dictionary.items(),key=lambda k:(k[0],k[1]),reverse=False))
+
+# print dictionary based on keys sorted des
+
+for i in dictionary.keys():
+    print((i,dictionary[i]))
+
+print(sorted(dictionary.items(),reverse=True))
+
+from operator import itemgetter
+
+lis = [{ "name" : "Nandini", "age" : 20},
+{ "name" : "Manjeet", "age" : 20 },
+{ "name" : "Nikhil" , "age" : 19 }]
+
+print(sorted(lis,key=itemgetter("age")))
 
 
 
